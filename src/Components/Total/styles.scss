@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.total{
+    @include box;
+    width: 85%;
+    justify-content: space-between;
+
+    .total__text-box{
+        h3{
+            font-size: 18px;
+        }
+
+        p{
+            font-size: 12px;
+        }
+    }
+
+    h2{
+        font-size: 20px;
+    }
+}

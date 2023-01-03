@@ -1,0 +1,24 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.feed{
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 20px;
+
+    .title-n-buttons{
+        @include center;
+        justify-content: space-between;
+
+        .btns{
+            display: flex;
+            gap: 15px;
+
+            button{
+                @include btn;
+            }
+        }
+    }
+}

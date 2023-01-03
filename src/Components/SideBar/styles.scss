@@ -1,0 +1,11 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+aside{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}

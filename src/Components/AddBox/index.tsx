@@ -14,7 +14,7 @@ function AddBox(){
                 </div>
                 <div className="value-type">
                     <div className="value">
-                        <label>Valor</label>
+                        <label title="prencha usando somente numeros" >Valor</label>
                         <Input placeholder="R$" />
                     </div>
                     <div className="type">

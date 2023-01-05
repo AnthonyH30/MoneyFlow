@@ -7,6 +7,8 @@
     flex-direction: column;
     width: 100%;
     padding-right: 20px;
+    gap: 20px;
+
 
     .title-n-buttons{
         @include center;
@@ -18,6 +20,50 @@
 
             button{
                 @include btn;
+            }
+        }
+    }
+
+
+    .section-finance{
+        height: 70vh;
+        overflow: auto;
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+        padding: 5px;
+
+        .fincance-box{
+            width: 100%;
+            @include box;
+            padding: 12px 24px;
+            min-height: 100px;
+            justify-content: space-between;
+            position: relative;
+            
+    
+            .title-type{
+                display: flex;
+                height: 100%;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+    
+            .value-btn{
+                h3{
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+
+                .trash-btn{
+                    position: absolute;
+                    top: 8px;
+                    right: 8px;
+                    @include center;
+                    background-color: $bg-color-secondary;
+                    padding: 3px;
+                    border-radius: 3px;
+                }
             }
         }
     }

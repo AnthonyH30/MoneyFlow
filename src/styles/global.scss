@@ -6,6 +6,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+::-webkit-scrollbar{
+    display: none;
+}
+
 label{
     font-size: 16px;
     font-weight: 600;

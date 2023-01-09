@@ -1,27 +1,33 @@
-import { memo } from "react"
+import { memo, useContext } from "react"
+import { FinanceContext } from "../../Context/FinanceContext";
 import Input from "../Input";
 import './styles.scss';
 
 
 function AddBox(){
+
+    const { setDescription, description, value, setValue, type, setType, handleSubmit } = useContext(FinanceContext);
+
+    console.log(type);
+
     return(
         <div className="sidebar">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="description">
-                    <label>Descrição</label>
-                    <Input placeholder="Descrição" />
+                    <label htmlFor="description">Descrição</label>
+                    <Input id="description" placeholder="Descrição" value={description} onChange={(e) => setDescription(e.target.value)} />
                     <p>Ex: Comprar roupas.</p>
                 </div>
                 <div className="value-type">
                     <div className="value">
-                        <label title="prencha usando somente numeros" >Valor</label>
-                        <Input placeholder="R$" />
+                        <label htmlFor="value" title="prencha usando somente numeros" >Valor</label>
+                        <Input id="value" placeholder="R$" value={value} onChange={(e) => setValue(e.target.value)} />
                     </div>
                     <div className="type">
-                        <label>Tipo</label>
-                        <select>
-                            <option selected >Entrada</option>
-                            <option>Saida</option>
+                        <label htmlFor="select">Tipo</label>
+                        <select id="select" onChange={(e) => setType(e.target.value)}>
+                            <option>Entrada</option>
+                            <option>Saída</option>
                         </select>
                     </div>
                 </div>

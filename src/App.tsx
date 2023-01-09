@@ -1,10 +1,13 @@
+import { FinanceContextProvider } from './Context/FinanceContext';
 import Home from './Pages/Home';
 import './styles/global.scss';
 
 function App() {
 
   return (
-    <Home />
+    <FinanceContextProvider>
+      <Home />
+    </FinanceContextProvider>
   )
 }
 

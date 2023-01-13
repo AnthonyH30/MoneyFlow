@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 
 type FincanceContextProps ={
     children: ReactNode;
@@ -12,6 +12,13 @@ const initialValue = {
     type: "Entrada",
     setType: () => {},
     handleSubmit: () => {},
+    data: [{
+        id: 1,
+        description: "Mercado",
+        value: "400",
+        type: "Saída",
+    }],
+    setData: () => {},
     finance: [{
         id: 1,
         description: "Mercado",
@@ -20,6 +27,10 @@ const initialValue = {
     }],
     setFinance: () => {},
     handleDelete: () => {},
+    total: 0,
+    setTotal: () => {},
+    currentSelected: "Todos",
+    setCurrentSelected: () => {},
 }
 
 type financeType ={
@@ -37,9 +48,15 @@ type FincanceContextType = {
     type: string;
     setType: (newState: string) => void;
     handleSubmit: (e:React.SyntheticEvent) => void;
+    data: financeType[];
+    setData: (newState: financeType[]) => void;
     finance: financeType[];
     setFinance: (newState: financeType[]) => void;
     handleDelete: (id: number) => void;
+    total: number;
+    setTotal: (newState: number) => void;
+    currentSelected: string;
+    setCurrentSelected: (newState: string) => void;
 }
 
 export const FinanceContext = createContext<FincanceContextType>(initialValue);
@@ -48,7 +65,10 @@ export const FinanceContextProvider = ({children}: FincanceContextProps) => {
     const [description, setDescription] = useState(initialValue.description);
     const [value, setValue] = useState(initialValue.value);
     const [type, setType] = useState(initialValue.type);
-    const [finance, setFinance] = useState(initialValue.finance)
+    const [data, setData] = useState(initialValue.data);
+    const [finance, setFinance] = useState(initialValue.finance);
+    const [total, setTotal] = useState(initialValue.total);
+    const [currentSelected, setCurrentSelected] = useState(initialValue.currentSelected);
 
     const handleSubmit = (e:React.SyntheticEvent) => {
         e.preventDefault();
@@ -59,17 +79,45 @@ export const FinanceContextProvider = ({children}: FincanceContextProps) => {
                 value: value,
                 type: type,
             }
-            setFinance([...finance, newFinanceItem]);
+            setData([...data, newFinanceItem]);
         }
     }
 
     const handleDelete = (id: number) => {
-        const filterFinance = finance.filter((item) => item.id !== id);
-        setFinance(filterFinance);
+        const filterdata = data.filter((item) => item.id !== id);
+        setData(filterdata);
     }
 
+    useEffect(() => {
+        const filteredEntries = data.filter(item => item.type === "Entrada");
+        const totalEntries = filteredEntries.map(item => Number(item.value)).reduce((acc, cur) => {
+            return acc + cur
+        },0);
+        
+        const filteredSpend = data.filter(item => item.type === "Saída");
+        const totalSpend = filteredSpend.map(item => Number(item.value)).reduce((acc, cur) => {
+            return acc + cur
+        },0);
+
+        setTotal(totalEntries - totalSpend);
+        setFinance(data);
+    },[data])
+
+    useEffect(()=>{
+        const filteredEntries: financeType[] = data.filter(item => item.type === "Entrada");
+        const filteredSpend: financeType[] = data.filter(item => item.type === "Saída");
+
+        if(currentSelected === "Todos"){
+            setFinance(data)
+        }else if(currentSelected === "Entradas"){
+            setFinance(filteredEntries);
+        }else if(currentSelected === "Saidas"){
+            setFinance(filteredSpend);
+        }
+    },[currentSelected])
+
     return(
-        <FinanceContext.Provider value={{ description, setDescription, value, setValue, type,  setType, handleSubmit, finance, setFinance, handleDelete}}>
+        <FinanceContext.Provider value={{ description, setDescription, value, setValue, type,  setType, handleSubmit, finance, setFinance, handleDelete, total, setTotal, currentSelected, setCurrentSelected, setData, data}}>
             {children}
         </FinanceContext.Provider>
     )

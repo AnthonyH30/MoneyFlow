@@ -8,8 +8,6 @@ function AddBox(){
 
     const { setDescription, description, value, setValue, type, setType, handleSubmit } = useContext(FinanceContext);
 
-    console.log(type);
-
     return(
         <div className="sidebar">
             <form onSubmit={handleSubmit}>

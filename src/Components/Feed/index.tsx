@@ -1,20 +1,20 @@
-import { memo, useContext } from "react";
+import { memo, useContext, useRef } from "react";
 import './styles.scss';
 import { FaTrash } from 'react-icons/fa';
 import { FinanceContext } from "../../Context/FinanceContext";
 
 function Feed(){
 
-    const { finance, handleDelete } = useContext(FinanceContext);
+    const { finance, handleDelete, setCurrentSelected, currentSelected } = useContext(FinanceContext);
+
+    const btns = ["Todos", "Entradas", "Saidas"];
 
     return(
         <div className="feed">
             <div className="title-n-buttons">
                 <h2 className="title">Resumo financeiro</h2>
                 <div className="btns">
-                    <button>Todos</button>
-                    <button>Entradas</button>
-                    <button>Saidas</button>
+                    {btns.map(item => <button style={currentSelected == item ? {backgroundColor: "blue"} : {}} onClick={() => setCurrentSelected(item)} key={item}>{item}</button>)}
                 </div>
             </div>
             <section className="section-finance">

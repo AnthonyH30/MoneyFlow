@@ -20,6 +20,8 @@
 
             button{
                 @include btn;
+                color: $bg-color-primary;
+                cursor: pointer;
             }
         }
     }

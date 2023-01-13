@@ -13,7 +13,7 @@ function Total(){
                 <h3>Valor Total:</h3>
                 <p>Esse valor se refere ao saldo.</p>
             </div>
-            <h3 style={total > 0 ? {color: "Blue"} : {color: "Red"}}>{total} R$</h3>
+            <h3 style={total >= 0 ? {color: "Blue"} : {color: "Red"}}>{total} R$</h3>
         </div>
     )
 }

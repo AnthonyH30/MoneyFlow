@@ -32,6 +32,7 @@ function Feed(){
                         </div>
                     </div>
                 ))}
+                {finance.length ? <p></p> :<p className="nofound">Nenhum registro encontrado...</p>}
             </section>
         </div>
     )

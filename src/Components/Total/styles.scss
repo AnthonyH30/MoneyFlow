@@ -5,6 +5,7 @@
     @include box;
     width: 85%;
     justify-content: space-between;
+    min-width: 320px;
 
     .total__text-box{
         h3{

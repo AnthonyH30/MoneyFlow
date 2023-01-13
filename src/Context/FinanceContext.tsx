@@ -12,19 +12,9 @@ const initialValue = {
     type: "Entrada",
     setType: () => {},
     handleSubmit: () => {},
-    data: [{
-        id: 1,
-        description: "Mercado",
-        value: "400",
-        type: "Saída",
-    }],
+    data: [] as any,
     setData: () => {},
-    finance: [{
-        id: 1,
-        description: "Mercado",
-        value: "400",
-        type: "Saída",
-    }],
+    finance: [] as any,
     setFinance: () => {},
     handleDelete: () => {},
     total: 0,
@@ -84,18 +74,18 @@ export const FinanceContextProvider = ({children}: FincanceContextProps) => {
     }
 
     const handleDelete = (id: number) => {
-        const filterdata = data.filter((item) => item.id !== id);
+        const filterdata = data.filter((item: financeType) => item.id !== id);
         setData(filterdata);
     }
 
     useEffect(() => {
-        const filteredEntries = data.filter(item => item.type === "Entrada");
-        const totalEntries = filteredEntries.map(item => Number(item.value)).reduce((acc, cur) => {
+        const filteredEntries = data.filter((item: financeType) => item.type === "Entrada");
+        const totalEntries = filteredEntries.map((item: financeType) => Number(item.value)).reduce((acc: number, cur: number) => {
             return acc + cur
         },0);
         
-        const filteredSpend = data.filter(item => item.type === "Saída");
-        const totalSpend = filteredSpend.map(item => Number(item.value)).reduce((acc, cur) => {
+        const filteredSpend = data.filter((item: financeType) => item.type === "Saída");
+        const totalSpend = filteredSpend.map((item: financeType) => Number(item.value)).reduce((acc: number, cur: number) => {
             return acc + cur
         },0);
 
@@ -104,8 +94,8 @@ export const FinanceContextProvider = ({children}: FincanceContextProps) => {
     },[data])
 
     useEffect(()=>{
-        const filteredEntries: financeType[] = data.filter(item => item.type === "Entrada");
-        const filteredSpend: financeType[] = data.filter(item => item.type === "Saída");
+        const filteredEntries: financeType[] = data.filter((item: financeType) => item.type === "Entrada");
+        const filteredSpend: financeType[] = data.filter((item: financeType) => item.type === "Saída");
 
         if(currentSelected === "Todos"){
             setFinance(data)
